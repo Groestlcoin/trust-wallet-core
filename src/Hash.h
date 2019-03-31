@@ -57,6 +57,9 @@ Data blake2b(const byte* begin, const byte* end, size_t size);
 
 Data blake2b(const byte* begin, const byte* end, size_t size, const Data& personal);
 
+/// Computes the Groestl512 hash.
+Data groestl512(const byte* begin, const byte* end);
+
 /// Computes the SHA1 hash.
 template <typename T>
 Data sha1(const T& data) {
@@ -136,6 +139,18 @@ template <typename T>
 Data blake2b(const T& data, size_t size, const Data& personal) {
     const auto begin = reinterpret_cast<const byte*>(data.data());
     return blake2b(begin, begin + data.size(), size, personal);
+}
+
+/// Computes the Groestl512 hash.
+template <typename T>
+Data groestl512(const T& data) {
+    const auto begin = reinterpret_cast<const byte*>(data.data());
+    return groestl512(begin, begin + data.size());
+}
+
+/// Computes the double Groestl512 hash.
+inline Data groestl512d(const byte* begin, const byte* end) {
+    return groestl512(groestl512(begin, end));
 }
 
 } // namespace TW::Hash
