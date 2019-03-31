@@ -13,6 +13,7 @@ TW_EXTERN_C_BEGIN
 TW_EXPORT_ENUM()
 enum TWCurve {
     TWCurveSECP256k1       /* "secp256k1" */,
+    TWCurveSECP256k1groestl/* "secp256k1-groestl" */,
     TWCurveEd25519         /* "ed25519" */,
     TWCurveNIST256p1       /* "nist256p1" */,
 };

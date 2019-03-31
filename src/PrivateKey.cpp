@@ -47,6 +47,7 @@ Data PrivateKey::sign(const Data& digest, TWCurve curve) const {
     Data result;
     bool success = true;
     switch (curve) {
+    case TWCurveSECP256k1groestl:
     case TWCurveSECP256k1: {
         result.resize(65);
         success = ecdsa_sign_digest(&secp256k1, bytes.data(), digest.data(), result.data(),

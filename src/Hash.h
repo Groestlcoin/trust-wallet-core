@@ -6,6 +6,8 @@
 
 #pragma once
 
+#include <functional>
+
 #include "Data.h"
 
 namespace TW::Hash {
@@ -23,7 +25,7 @@ static const size_t sha512Size = 64;
 static const size_t ripemdSize = 20;
 
 // Alias to pass pointers to functions below.
-using Hasher = Data (*)(const byte*, const byte*);
+using Hasher = std::function<Data(const byte*, const byte*)>;
 
 /// Computes the SHA1 hash.
 Data sha1(const byte* begin, const byte* end);
