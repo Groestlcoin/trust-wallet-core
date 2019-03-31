@@ -22,6 +22,9 @@ static const size_t sha512Size = 64;
 /// Number of bytes in a RIPEMD160 hash.
 static const size_t ripemdSize = 20;
 
+// Alias to pass pointers to functions below.
+using Hasher = Data (*)(const byte*, const byte*);
+
 /// Computes the SHA1 hash.
 Data sha1(const byte* begin, const byte* end);
 
@@ -66,6 +69,11 @@ template <typename T>
 Data sha256(const T& data) {
     const auto begin = reinterpret_cast<const byte*>(data.data());
     return sha256(begin, begin + data.size());
+}
+
+/// Computes the double SHA256 hash.
+inline Data sha256d(const byte* begin, const byte* end) {
+    return sha256(sha256(begin, end));
 }
 
 /// Computes the SHA512 hash.
